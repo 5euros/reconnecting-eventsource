@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fanout/reconnecting-eventsource.git"
+    "url": "git+https://github.com/5euros/reconnecting-eventsource.git"
   },
   "author": "Fanout, Inc. <info@fanout.io>",
   "license": "MIT",
@@ -34,9 +34,9 @@
     "push"
   ],
   "bugs": {
-    "url": "https://github.com/fanout/reconnecting-eventsource/issues"
+    "url": "https://github.com/5euros/reconnecting-eventsource/issues"
   },
-  "homepage": "https://github.com/fanout/reconnecting-eventsource#readme",
+  "homepage": "https://github.com/5euros/reconnecting-eventsource#readme",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
