@@ -32,7 +32,8 @@ export default class ReconnectingEventSource {
 
         this.url = url;
         this.readyState = 0;
-        this.max_retry_time = 3000;
+        this.max_retry_time = 1000;
+        this.initial_max_retry_time = this.max_retry_time;
 
         if (this._configuration != null) {
             if (this._configuration.lastEventId) {
@@ -42,6 +43,7 @@ export default class ReconnectingEventSource {
 
             if (this._configuration.max_retry_time) {
                 this.max_retry_time = this._configuration.max_retry_time;
+                this.initial_max_retry_time = this.max_retry_time;
                 delete this._configuration['max_retry_time'];
             }
         }
@@ -77,6 +79,7 @@ export default class ReconnectingEventSource {
 
     _onopen(event) {
         if (this.readyState === 0) {
+            this.max_retry_time = this.initial_max_retry_time;
             this.readyState = 1;
             this.onopen(event);
         }
@@ -94,9 +97,10 @@ export default class ReconnectingEventSource {
                 this._eventSource.close();
                 this._eventSource = null;
 
-                // reconnect after random timeout < max_retry_time
-                const timeout = Math.round(this.max_retry_time * Math.random());
+                const timeout = this.max_retry_time;
                 this._timer = setTimeout(() => this._start(), timeout);
+
+                this.max_retry_time = this.max_retry_time * 2
             }
         }
     }
